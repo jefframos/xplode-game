@@ -23,7 +23,7 @@
 
 	    <meta property="og:title" content="Play it!">
 		<meta property="og:site_name" content="Xplode Game">
-		<meta property="og:description" content="Trust in me... it's very addictive!">
+		<meta property="og:description" content="Try this free, funny and addictive game!">
 
 		<meta property="og:image" content="http://jefframos.github.io/xplode-game/dist/img/share.jpg">
 		<meta property="og:image:type" content="image/jpeg">
@@ -62,19 +62,19 @@
 				border: none;
 			}
 
-			@media (min-width: 500px) {
+			@media (max-width: 400px) {
 			  	.footer{
-					position: absolute;
 					right: 5px;
 					left: 5px;
 					bottom: 5px;
 					font-size: 10px;
-					font-family: monospace;
-					color: white
 				}
-
-				.donate .btn{
-					font-size: 10px;
+				.donate, .copy {
+					clear: both;
+					text-align: center;
+					float: none!important;
+					display: block;
+					margin-top: 10px;
 				}
 			}
 
@@ -88,18 +88,14 @@
 				color: white
 			}
 			.footer .copy{
-				position: absolute;
-				right: 0px;
-				bottom: 0;
+				float: right;
 			}
 			.footer a{
 				color:#555555;
 				text-decoration: none;
 			}
 			.donate{
-				position:absolute;
-				left:0px;
-				bottom: 0px;
+				float: left;
 			}
 			.donate .btn{
 				font-size: 12px;
