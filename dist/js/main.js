@@ -1233,8 +1233,7 @@ var Application = AbstractApplication.extend({
     gameOver: function() {
         if (this.endGame) return this.crazyContent.alpha = 0, this.coinsLabel.alpha = 0, 
         void (this.loaderBar.getContent().alpha = 0);
-        window.navigator && navigator.vibrate(200), this.hitTouch.parent.removeChild(this.hitTouch), 
-        setTimeout(function() {
+        this.hitTouch.parent.removeChild(this.hitTouch), setTimeout(function() {
             self.player.preKill();
         }, 100), this.targetJump.preKill(), this.base.parent.removeChild(this.base), this.earthquake(40), 
         this.endGame = !0, this.crazyContent.alpha = 0, this.coinsLabel.alpha = 0, this.loaderBar.getContent().alpha = 0, 
@@ -1396,8 +1395,7 @@ var Application = AbstractApplication.extend({
         this.layer.addChild(perfect2);
     },
     getPerfect: function() {
-        window.navigator && navigator.vibrate(200), APP.audioController.playSound("perfect"), 
-        this.addRegularLabel(APP.vecPerfects[Math.floor(APP.vecPerfects.length * Math.random())], "50px Vagron");
+        APP.audioController.playSound("perfect"), this.addRegularLabel(APP.vecPerfects[Math.floor(APP.vecPerfects.length * Math.random())], "50px Vagron");
         this.earthquake(40), this.levelCounter += .05 * this.levelCounterMax, this.levelCounter > this.levelCounterMax && (this.levelCounter = this.levelCounterMax);
     },
     getCoin: function(isPerfect) {
@@ -1480,9 +1478,7 @@ var Application = AbstractApplication.extend({
             y: 50,
             x: -windowWidth / 2,
             ease: "easeOutElastic",
-            onComplete: function() {
-                self.addCrazyMessage("HOLD AND RELEASE");
-            }
+            onComplete: function() {}
         }), TweenLite.from(this.base.position, 4, {
             y: this.base.position.y + 50,
             x: this.base.position.x - windowWidth / 2,
@@ -2071,4 +2067,4 @@ var apps = -1 === document.URL.indexOf("http://") && -1 === document.URL.indexOf
 apps ? document.addEventListener("deviceready", deviceReady) : (res = {
     x: window.innerWidth,
     y: window.innerHeight
-}, deviceReady());
+}, setTimeout(deviceReady, 500));
