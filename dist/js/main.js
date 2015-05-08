@@ -2067,7 +2067,7 @@ var Application = AbstractApplication.extend({
     y: window.outerHeight
 }, resizeProportional = !0, windowWidth = res.x, windowHeight = res.y, realWindowWidth = res.x, realWindowHeight = res.y, gameScale = 1, screenOrientation = "portait", windowWidthVar = window.innerWidth, windowHeightVar = window.innerHeight, gameView = document.getElementById("game");
 
-testMobile() || (document.body.className = ""), console.log(gameView);
+testMobile() || (document.body.className = "");
 
 var ratio = 1, init = !1, renderer, APP, retina = window.devicePixelRatio >= 2 ? 2 : 1, initialize = function() {
     PIXI.BaseTexture.SCALE_MODE = PIXI.scaleModes.NEAREST, requestAnimFrame(update);
