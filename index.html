@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> 
 <html class="no-js"> <!--<![endif]-->
 	<head>
-		<title>Balls</title>
+		<title>XPLODE</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
@@ -20,6 +20,7 @@
 	    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 
 		<link rel="stylesheet" href="dist/css/main.css">
+		<link rel="shortcut icon" type="image/png" href="dist/img/favicon.png"/>
 		<style type="text/css">	
 			html{
 				overflow: hidden;
@@ -56,29 +57,68 @@
 					display: none;
 				}
 			}
+			.footer{
+				position: absolute;
+				right: 15px;
+				left: 15px;
+				bottom: 15px;
+				font-size: 12px;
+				font-family: monospace;
+				color: white
+			}
+			.footer .copy{
+				position: absolute;
+				right: 0px;
+				bottom: 0;
+			}
+			.footer a{
+				color:#555555;
+				text-decoration: none;
+			}
+			.donate{
+				position:absolute;
+				left:0px;
+				bottom: 0px;
+			}
+			.donate .btn{
+				font-size: 12px;
+				font-family: monospace;
+				color: white;
+				cursor: pointer;
+				padding: 0;
+				margin: 0;
+				background: transparent;
+				outline: none;
+				text-transform: uppercase;
+				border: 0;
+			}
 		</style>
 	</head>
 	<body class='mobile'>		
 		<canvas id='game'></canvas>
-		<!-- <script src="http://debug-software.intel.com/target/target-script-min.js#8YlTKL6_8EZRnthBozC5adtSEe5oplfNpvMGnoeaN8o"></script> -->
+		<footer class="footer">
+			<span class="copy">Crafted with love by <a target='blank' href="http://www.jefframos.me">Jeff Ramos</a></span>
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class='donate'>
+				<input type="hidden" name="cmd" value="_s-xclick">
+				<input type="hidden" name="hosted_button_id" value="WLUZ4TDXF7SDA">
+				<input type="submit" class="btn" value="Buy me a coffee" border="0" name="submit" alt="PayPal - A maneira fácil e segura de enviar pagamentos online!">
+				<img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1">
+			</form>
+
+		</footer>
 		<script type="text/javascript" src="cordova.js"></script>
 		<script src="dist/js/lib/plugins.js"></script>
 		<script src="dist/js/main.js"></script>
 
-		<!-- declare the 'SpilData' object and the app ID property -->
-	    <script type="text/javascript">
-	    // var SpilData = {
-	    //     id: '576742227280294490' // Replace with the value you receive from Spil Games
-	    // };
-	     
-	    // <!-- Initialise the Spil HTML5 API -->
-	    // GameAPI.loadAPI (function (apiInstance) {
-	    //     // The API is ready for use.
-	    //     if (window.console && window.console.log) {
-	    //         console.log('GameAPI version ' + apiInstance.version + ' loaded!');
-	    //         APP.apiLoaded(apiInstance);
-	    //     }
-	    // }, SpilData);
-	    // </script>
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-62788805-1', 'auto');
+			ga('send', 'pageview');
+
+		</script>
 	</body>
 </html>

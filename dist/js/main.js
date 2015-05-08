@@ -1116,7 +1116,7 @@ var Application = AbstractApplication.extend({
         this.interactiveBackground.build(), this.addChild(this.interactiveBackground)), 
         this.hitTouch = new PIXI.Graphics(), this.hitTouch.interactive = !0, this.hitTouch.beginFill(0), 
         this.hitTouch.drawRect(0, 0, windowWidth, windowHeight), this.hitTouch.alpha = 0, 
-        this.hitTouch.hitArea = new PIXI.Rectangle(0, 0, windowWidth, windowHeight), this.tapDown = !1, 
+        this.hitTouch.hitArea = new PIXI.Rectangle(0, 40, windowWidth, windowHeight), this.tapDown = !1, 
         this.hitTouch.touchend = this.hitTouch.mouseup = function(mouseData) {
             self.tapDown = !1, self.shoot(self.force / 30 * windowHeight * .1);
         }, this.hitTouch.touchstart = this.hitTouch.mousedown = function(touchData) {
@@ -1318,7 +1318,9 @@ var Application = AbstractApplication.extend({
             twLabel.position.x = 29, twLabel.position.y = 3, twLabel.resolution = 2, twContainer.addChild(twButton), 
             twContainer.addChild(twLabel), scoreContainer.addChild(twContainer), twContainer.position.x = scoreBack.width / 2 - twButton.width / 2, 
             twContainer.position.y = 166, twContainer.interactive = !0, twContainer.buttonMode = !0, 
-            twContainer.touchstart = twContainer.mousedown = function(mouseData) {};
+            twContainer.hitArea = new PIXI.Rectangle(0, 0, 120, 30), twContainer.touchstart = twContainer.mousedown = function(mouseData) {
+                window.open("https://twitter.com/home?status=http://jefframos.github.io/xplode-game/");
+            };
             var fbContainer = new PIXI.DisplayObjectContainer(), fbButton = new PIXI.Graphics();
             fbButton.beginFill(3889560), fbButton.drawRoundedRect(0, 0, 120, 30, 5);
             var fbLabel = new PIXI.Text("Facebook", {
@@ -1331,7 +1333,9 @@ var Application = AbstractApplication.extend({
             fbLabel.position.x = 17, fbLabel.position.y = 3, fbLabel.resolution = 2, fbContainer.addChild(fbButton), 
             fbContainer.addChild(fbLabel), scoreContainer.addChild(fbContainer), fbContainer.position.x = scoreBack.width / 2 - fbButton.width / 2, 
             fbContainer.position.y = 204, fbContainer.interactive = !0, fbContainer.buttonMode = !0, 
-            fbContainer.touchstart = fbContainer.mousedown = function(mouseData) {};
+            fbContainer.hitArea = new PIXI.Rectangle(0, 0, 120, 30), fbContainer.touchstart = fbContainer.mousedown = function(mouseData) {
+                window.open("https://www.facebook.com/sharer/sharer.php?u=http://jefframos.github.io/xplode-game/");
+            };
         }
         var playAgainContainer = new PIXI.DisplayObjectContainer(), playAgainButton = new PIXI.Graphics();
         playAgainButton.beginFill(16777215), playAgainButton.drawRoundedRect(0, 0, 100, 60, 5);
@@ -1517,6 +1521,11 @@ var Application = AbstractApplication.extend({
     },
     build: function() {
         this._super();
+        var text = new PIXI.Text("PLAY", {
+            font: "50px Vagron",
+            fill: "#FFFFFF"
+        });
+        this.addChild(text), text.alpha = 0;
         var assetsToLoader = [];
         assetsToLoader.length > 0 && !this.isLoaded ? (this.loader = new PIXI.AssetLoader(assetsToLoader), 
         this.initLoad()) : this.onAssetsLoaded();
