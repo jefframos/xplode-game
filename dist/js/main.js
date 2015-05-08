@@ -1121,7 +1121,12 @@ var Application = AbstractApplication.extend({
             self.tapDown = !1, self.shoot(self.force / 30 * windowHeight * .1);
         }, this.hitTouch.touchstart = this.hitTouch.mousedown = function(touchData) {
             self.tapDown = !0;
-        }, this.updateable = !0, APP.withAPI && GameAPI.GameBreak.request(function() {
+        }, this.updateable = !0, document.body.addEventListener("keyup", function(e) {
+            console.log(e.keyCode), (32 === e.keyCode || 40 === e.keyCode) && (self.tapDown = !1, 
+            self.shoot(APP.force / 30 * windowHeight * .1));
+        }), document.body.addEventListener("keydown", function(e) {
+            (32 === e.keyCode || 40 === e.keyCode) && (self.tapDown = !0);
+        }), APP.withAPI && GameAPI.GameBreak.request(function() {
             self.pauseModal.show();
         }, function() {
             self.pauseModal.hide();
@@ -1208,23 +1213,25 @@ var Application = AbstractApplication.extend({
         this.player.inError = !0, this.levelCounter -= .1 * this.levelCounterMax, this.levelCounter < 0 && (this.levelCounter = 0);
     },
     shoot: function(force) {
-        if (this.player.inError) return void APP.audioController.playSound("error");
-        this.startLevel = !0, this.player.jump(force), this.player.improveGravity(), this.force = 0, 
-        TweenLite.to(this.loaderBar.getContent(), .2, {
-            delay: .2,
-            alpha: 1
-        });
-        var ls = Math.floor(4 * Math.random()) + 1;
-        APP.audioController.playSound("laser" + ls), this.addCrazyMessage("HOLD");
+        if (this.player) {
+            if (this.player.inError) return void APP.audioController.playSound("error");
+            this.startLevel = !0, this.player.jump(force), this.player.improveGravity(), this.force = 0, 
+            TweenLite.to(this.loaderBar.getContent(), .2, {
+                delay: .2,
+                alpha: 1
+            });
+            var ls = Math.floor(4 * Math.random()) + 1;
+            APP.audioController.playSound("laser" + ls), this.addCrazyMessage("HOLD");
+        }
     },
     reset: function() {
         this.destroy(), this.build();
     },
     update: function() {
-        this.updateable && (this.player ? (this.player.inError || (this.tapDown && this.force < 30 && (this.force += .9, 
-        this.player.charge(), clearInterval(this.holdInterval)), this.startLevel && (this.levelCounter--, 
-        this.levelCounter < 0 && (this.levelCounter = 0))), this.player.force = this.force, 
-        this.player.velocity.y < 0 ? this.interactiveBackground.gravity = Math.abs(this.player.velocity.y) / 15 : this.interactiveBackground.gravity = 0, 
+        this.updateable && (this.player ? (this.player.inError || (this.tapDown && this.force < 30 && (APP.force = this.force += .9, 
+        this.player.charge(), console.log(this.force), clearInterval(this.holdInterval)), 
+        this.startLevel && (this.levelCounter--, this.levelCounter < 0 && (this.levelCounter = 0))), 
+        this.player.force = this.force, this.player.velocity.y < 0 ? this.interactiveBackground.gravity = Math.abs(this.player.velocity.y) / 15 : this.interactiveBackground.gravity = 0, 
         this.levelCounter <= 0 && this.gameOver(), this.loaderBar.updateBar(this.levelCounter, this.levelCounterMax)) : this.interactiveBackground.gravity = 1, 
         this.crazyLogo && this.crazyLogo.update(), this.base && (this.base.side || (this.base.side = 1), 
         this.base.alpha += .01 * this.base.side, (this.base.alpha > .5 || this.base.alpha <= .1) && (this.base.side *= -1)), 
@@ -1414,9 +1421,8 @@ var Application = AbstractApplication.extend({
             onUpdate: function() {
                 self.background.clear(), self.background.beginFill(APP.backColor), self.background.drawRect(-80, -80, windowWidth + 160, windowHeight + 160);
             }
-        })), document.body.style.backgroundColor = APP.vecColorsS[APP.currentColorID], console.log(document.body.style.backgroundColor), 
-        this.player && (tempColor = addBright(temptempColor, .65), this.player.setColor(tempColor), 
-        this.loaderBar.setBackColor(tempColor));
+        })), document.body.style.backgroundColor = APP.vecColorsS[APP.currentColorID], this.player && (tempColor = addBright(temptempColor, .65), 
+        this.player.setColor(tempColor), this.loaderBar.setBackColor(tempColor));
     },
     earthquake: function(force) {
         var earth = new TimelineLite();
