@@ -1343,39 +1343,46 @@ var Application = AbstractApplication.extend({
                 window.open("https://www.facebook.com/sharer/sharer.php?u=http://jefframos.github.io/xplode-game/");
             };
         }
-        var playAgainContainer = new PIXI.DisplayObjectContainer(), playAgainButton = new PIXI.Graphics();
-        playAgainButton.beginFill(16777215), playAgainButton.drawRoundedRect(0, 0, 100, 60, 5);
-        var playAgainLabel = new PIXI.Text("PLAY", {
-            align: "center",
-            font: "30px Vagron",
-            fill: APP.vecColorsS[APP.currentColorID],
-            wordWrap: !0,
-            wordWrapWidth: 500
-        });
-        playAgainLabel.position.x = 15, playAgainLabel.position.y = 10, playAgainLabel.resolution = 2, 
-        playAgainContainer.addChild(playAgainButton), playAgainContainer.addChild(playAgainLabel), 
-        this.endMenuContainer.addChild(playAgainContainer), playAgainContainer.position.x = windowWidth / 2 - playAgainButton.width / 2, 
-        playAgainContainer.position.y = scoreContainer ? scoreContainer.position.y + scoreContainer.height + 20 : .8 * windowHeight - playAgainContainer.height, 
-        playAgainContainer.interactive = !0, playAgainContainer.buttonMode = !0, playAgainContainer.touchstart = playAgainContainer.mousedown = function(mouseData) {
-            TweenLite.to(self.endMenuContainer, 1, {
-                x: windowWidth,
-                y: -50,
-                ease: "easeOutCubic",
-                onComplete: function() {
-                    self.reset();
-                }
-            }), self.crazyLogo.removeInterval(), self.interactiveBackground.accel = 5, TweenLite.to(self.interactiveBackground, 2, {
-                accel: 0
-            }), APP.audioController.playSound("play");
-        }, TweenLite.from(this.crazyLogo.getContent(), 4.5, {
+        setTimeout(function() {
+            var playAgainContainer = new PIXI.DisplayObjectContainer(), playAgainButton = new PIXI.Graphics();
+            playAgainButton.beginFill(16777215), playAgainButton.drawRoundedRect(0, 0, 100, 60, 5);
+            var playAgainLabel = new PIXI.Text("PLAY", {
+                align: "center",
+                font: "30px Vagron",
+                fill: APP.vecColorsS[APP.currentColorID],
+                wordWrap: !0,
+                wordWrapWidth: 500
+            });
+            playAgainLabel.position.x = 15, playAgainLabel.position.y = 10, playAgainLabel.resolution = 2, 
+            playAgainContainer.addChild(playAgainButton), playAgainContainer.addChild(playAgainLabel), 
+            TweenLite.from(playAgainContainer, .5, {
+                alpha: 0
+            }), self.endMenuContainer.addChild(playAgainContainer), playAgainContainer.position.x = windowWidth / 2 - playAgainButton.width / 2, 
+            playAgainContainer.position.y = scoreContainer ? scoreContainer.position.y + scoreContainer.height + 20 : .8 * windowHeight - playAgainContainer.height, 
+            playAgainContainer.interactive = !0, playAgainContainer.buttonMode = !0, playAgainContainer.touchstart = playAgainContainer.mousedown = function(mouseData) {
+                TweenLite.to(self.endMenuContainer, 1, {
+                    x: windowWidth,
+                    y: -50,
+                    ease: "easeOutCubic",
+                    onComplete: function() {
+                        self.reset();
+                    }
+                }), self.crazyLogo.removeInterval(), self.interactiveBackground.accel = 5, TweenLite.to(self.interactiveBackground, 2, {
+                    accel: 0
+                }), APP.audioController.playSound("play");
+            };
+        }, 500), TweenLite.from(this.crazyLogo.getContent(), 4.5, {
+            delay: .4,
             x: 1.1 * windowWidth,
             y: this.crazyLogo.getContent().position.y - 50,
             ease: "easeOutElastic"
         }), TweenLite.from(this.endMenuContainer, 5, {
+            delay: .4,
             x: 1.1 * windowWidth,
             y: this.endMenuContainer.position.y - 50,
             ease: "easeOutElastic"
         }), TweenLite.to(this.interactiveBackground, 2, {
+            delay: .4,
             accel: 0
         });
     },
